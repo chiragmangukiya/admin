@@ -31,15 +31,12 @@ function Sidebar() {
      </div>
      <div className={(isOpen) ? 'sidebar isopen' : 'sidebar'}>
           <div className="logo border-bottom">
-               <a href="#">{(isOpen) ? <img src={require('../image/logo192.png')} width={35} /> : 'Logo Here'}</a>
+               <a href="#"><img src={require('../image/logo192.png')} width={35} /> <span className='logo_name'>React App</span> </a>
           </div>
           <div className="profile border-bottom d-flex flex-wrap align-items-center">
-               <div className="pro_img">
-                    <img src={require('../image/kiran deshpande.jpeg')} className='img-fit' alt="" />
-               </div>
-               <div className="pro_name ps-3 w-75">
-                    <h5 className='p_name m-0 text-truncate d-inline-block w-100'>Chirag Mangukiya</h5>
-                    <p className='p_desi m-0 text-muted '>Web Developer</p>
+               <div className="d-flex align-items-center">
+                    <img src={require('../image/kiran deshpande.jpeg')} className='img-fit pro_img' alt="" />
+                    <span className='p_name text-truncate'>Chirag Mangukiya</span>
                </div>
           </div>
           <nav>
