@@ -15,6 +15,7 @@
   z-index: 9999;
   transition: .3s;
   overflow: hidden;
+  background-color: #fff;
 }
 .sidebar.isopen{
   width: 70px;
@@ -78,10 +79,10 @@
 }
 .main_menu li:hover > a{
   background-color: #f7eeff;
-  color: blueviolet;
+  color: var(--bg-purple);
 }
 .main_menu li.active a{
-  background-color: blueviolet;
+  background-color: var(--bg-purple);
   color: white;
 }
 .sub_menu li a{
@@ -93,10 +94,15 @@
 /* top header */
 .top_header{
   padding: 10px;
-  margin-left: 300px;
+  padding-left: 300px;
   border-bottom: 1px #dee2e6 solid;
   transition: .3s;
   max-height: 66px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
 }
 .top_main_menu li a{
   padding: 10px;
@@ -104,7 +110,7 @@
   color: #777;
 }
 .top_main_menu li:hover > a{
-  color: blueviolet;
+  color: var(--bg-purple);
 }
 .bar_icon{
   padding: 10px;
@@ -116,10 +122,105 @@
   cursor: pointer;
 }
 .right_icon li:hover {
-  color: blueviolet;
+  color: var(--bg-purple);
 }
 
 /* Dashboard */
-.main_dashboard{
-  margin: 10px 10px 0 315px;
+main{
+  padding: 76px 10px 0 310px;
+  transition: .3s;
+}
+.sidebar.isopen + main{
+  padding: 76px 10px 0 80px;
+}
+.page_title{
+  padding: 10px;
+  margin-bottom: 30px;
+}
+.breadcrumb a{
+  padding-left: 5px;
+  display: block;
+  color: blue;
+}
+.breadcrumb a.active{
+  color: #777;
+}
+.breadcrumb a::before{
+  content: '/';
+  margin-right: 5px;
+}
+.breadcrumb a:nth-child(1)::before{
+  content: '';
+  margin-right: 0px;
+}
+
+/* login */
+.login_box{
+  width: 40%;
+}
+.login_header{
+  background-color: var(--bg-purple);
+}
+.login_box .txt_box{
+  padding: 10px 15px 10px 40px !important;
+  border-radius: 5px !important;
+}
+.login_box .txt_box:focus{
+  box-shadow: none !important;
+  border-color: var(--bg-purple);
+  background-color: transparent;
+}
+.login_box .input-group{
+  position: relative;
+}
+.login_box .input-group-text{
+  padding: 15px !important;
+  color: var(--bg-purple);
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+.btn-login{
+  background-color: var(--bg-purple) !important;
+  color: white !important;
+  padding: 10px 20px !important;
+}
+
+/* add course */
+.input_frm .txt_box{
+    padding: 12px;
+}
+.input_frm .txt_box:focus{
+  box-shadow: none !important;
+  border-color: var(--bg-purple);
+}
+.frm_title{
+  color: var(--bg-purple);
+}
+
+/* add student */
+.tab_view .nav-tabs{
+  border-color: var(--bg-purple) !important;
+}
+.tab_view .nav-link{
+  color: #000 !important;
+}
+.tab_view .nav-link.active{
+  border-color: var(--bg-purple) !important;
+  color: var(--bg-purple) !important;
+  font-weight: bold;
+  border-bottom-color: transparent !important;
+}
+.tab_view .admission_form .txt_box{
+  padding: 10px;
+}
+.tab_view .nav-item{
+  margin: 0 5px;
+}
+.tab_view .nav-item:hover .nav-link{
+  border-color: var(--bg-purple) !important;
+  border-bottom-color: transparent !important;
 }
