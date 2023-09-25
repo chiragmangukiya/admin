@@ -8,6 +8,7 @@ function Sidebar() {
      const [openA, setOpenA] = useState(false);
      const [openB, setOpenB] = useState(false);
      const [openC, setOpenC] = useState(false);
+     const [openD, setOpenD] = useState(false);
 
      const [isOpen,setisOpen] = useState(false);
 
@@ -48,9 +49,21 @@ function Sidebar() {
                          </Link>
                     </li>
                     <li>
+                         <a href="javascript:void(0)" onClick={() => setOpenD(!openD)} aria-controls="example-collapse-text">
+                              <FaCompass></FaCompass>
+                              <span>Manage User</span>
+                         </a>
+                         <Collapse in={openD}>
+                              <ul className="sub_menu ps-0" >
+                                   <li><Link to="adduser">Add User</Link></li>
+                                   <li><Link to="viewuser">View User</Link></li>
+                              </ul>
+                         </Collapse>
+                    </li>
+                    <li>
                          <a href="javascript:void(0)" onClick={() => setOpenA(!openA)} aria-controls="example-collapse-text">
                               <FaCompass></FaCompass>
-                              <span>Course</span>
+                              <span>Manage Course</span>
                          </a>
                          <Collapse in={openA}>
                               <ul className="sub_menu ps-0" >

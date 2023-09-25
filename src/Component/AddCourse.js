@@ -20,7 +20,7 @@ function AddCourse() {
                         <div className="input-group mb-3">
                           <input type="text" className="form-control txt_box" placeholder="Course Name"  />
                         </div>
-                        <button type="submit" className="btn btn-login mt-3 d-block ">Add Course</button>
+                        <button type="submit" className="btn btn-login mt-3 d-block mx-auto">Add Course</button>
                     </div>
                </div>
           </div>
