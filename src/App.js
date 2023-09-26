@@ -12,15 +12,29 @@ import Addstudent from './Component/Addstudent';
 import Viewstudent from './Component/Viewstudent';
 import Adduser from './Component/Adduser';
 import Viewuser from './Component/Viewuser.js';
+import { useEffect, useState } from 'react';
 
 function App() {
+  
+  const [local,setlocal]=useState('');
+
+  useEffect(()=>{
+    const local_val=localStorage.getItem('token');
+    
+      setlocal(local_val);
+      // console.log(local_val);
+    
+  },[])
+
   return (
     <>
 
-     <Sidebar />
+      {
+        (local !== null) ? <Sidebar /> : <Login />
+      }
 
       <Routes>
-        {/* <Route path="/" element={ <Login /> } /> */}
+        <Route path="/" element={ <Login /> } />
         <Route path="/dashboard" element={ <Dashboard /> } />
         <Route path="/addCourse" element={ <AddCourse /> } />
         <Route path="/viewCourse" element={ <ViewCourse /> } />

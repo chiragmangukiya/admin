@@ -1,7 +1,28 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function AddCourse() {
+
+  const [addcourse,setCourse]=useState('');
+  const token = localStorage.getItem('token')
+
+  const addCourse = () => {
+      axios.post('http://localhost:5000/course/addcourse',{
+        coursename: addcourse
+      },{
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then((res)=>{
+          // console.log(res.data.status);
+          if(res.data.status === 'Course Add Successfully'){
+            setCourse('');
+          }
+      })
+  }
+
   return (
     <>
       <main>
@@ -18,9 +39,9 @@ function AddCourse() {
                     <div className="p-5">
                         <div className="frm_title fs-4 text-center mb-3 fw-bold">Add Course</div>
                         <div className="input-group mb-3">
-                          <input type="text" className="form-control txt_box" placeholder="Course Name"  />
+                          <input type="text" className="form-control txt_box" placeholder="Course Name" value={addcourse} onChange={(e)=>{setCourse(e.target.value)}}  />
                         </div>
-                        <button type="submit" className="btn btn-login mt-3 d-block mx-auto">Add Course</button>
+                        <button type="button" onClick={addCourse} className="btn btn-login mt-3 d-block mx-auto">Add Course</button>
                     </div>
                </div>
           </div>

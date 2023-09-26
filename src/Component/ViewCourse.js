@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 function ViewCourse() {
+
+  const token = localStorage.getItem('token')
+  const [allCourse,setallCourse]=useState([]);
+  const [status,setstatus]=useState(false);
+
+    useEffect(()=>{
+        axios.get("http://localhost:5000/course/allcourse",{
+          headers: {
+            'Authorization': token
+          }
+        })
+        .then((res)=>{
+          console.log(res.data);
+          // setallCourse(res.data)
+          setstatus(true)          
+        })
+    },[])
+
+  if(status)
+  {
   return (
     
     <main>
@@ -27,21 +48,17 @@ function ViewCourse() {
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
+                              {/* {
+                                allCourse.map((item,ind)=>{
+                                  return(
+                                    <tr key={ind}>
+                                      <th scope="row">{ind+1}</th>
+                                      <td>{item.coursename}</td>
+                                      <td>Otto</td>
+                                    </tr>
+                                  )
+                                })
+                              } */}
                             </tbody>
                           </table>
                         </div>
@@ -50,8 +67,13 @@ function ViewCourse() {
           </div>
 
     </main>
-
   )
+  }
+  else{
+    return( 
+      <h1>Data Load</h1>
+    )
+  }
 }
 
 export default ViewCourse

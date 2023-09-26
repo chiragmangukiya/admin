@@ -4,11 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Sidebar from './Sidebar';
 
 function Dashboard() {
-  return (
-     <>
-     
-     {/* <Sidebar /> */}
-
+   
+     return (
+       <>
      <main>
           
           <div className="page_title d-flex justify-content-between align-items-center">

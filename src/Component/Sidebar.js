@@ -12,6 +12,13 @@ function Sidebar() {
 
      const [isOpen,setisOpen] = useState(false);
 
+     // ====================== log out ======================
+
+     const handleLogout = () => {
+          localStorage.removeItem('token');
+          window.location = '/';
+     };
+
   return (
     <>
      <div className="top_header" style={(isOpen) ? {paddingLeft:'70px'} : {paddingLeft:'300px'}}>
@@ -25,7 +32,7 @@ function Sidebar() {
                </div>
                <div className="col-auto ms-auto">
                     <ul className='right_icon d-flex p-0 m-0'>
-                         <li><FaPowerOff></FaPowerOff></li>
+                         <li onClick={handleLogout}><FaPowerOff></FaPowerOff></li>
                     </ul>
                </div>
           </div>
@@ -43,7 +50,7 @@ function Sidebar() {
           <nav>
                <ul className='main_menu p-0'>
                     <li className='active'>                         
-                         <Link to="/">
+                         <Link to="/dashboard">
                               <FaTachometerAlt></FaTachometerAlt>
                               <span>Dashboard</span>
                          </Link>
