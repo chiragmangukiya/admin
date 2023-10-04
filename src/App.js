@@ -26,6 +26,11 @@ function App() {
     
   },[])
 
+  // window.onbeforeunload = function() {
+  //   localStorage.removeItem('token');
+  //   return '';
+  // };
+
   return (
     <>
 

@@ -1,11 +1,16 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Success from './Success';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { BsCheckCircle } from "react-icons/bs";
 
 function AddCourse() {
 
   const [addcourse,setCourse]=useState('');
   const token = localStorage.getItem('token')
+  const [modalShow, setModalShow] = useState(false);
 
   const addCourse = () => {
       axios.post('http://localhost:5000/course/addcourse',{
@@ -18,6 +23,7 @@ function AddCourse() {
       .then((res)=>{
           // console.log(res.data.status);
           if(res.data.status === 'Course Add Successfully'){
+            setModalShow(true)
             setCourse('');
           }
       })
@@ -45,6 +51,25 @@ function AddCourse() {
                     </div>
                </div>
           </div>
+
+          <Modal 
+            size="md"
+            centered
+            className='success_modal'
+            show={modalShow} 
+            onHide={() => setModalShow(false)}
+          >
+            <Modal.Body>
+              <Modal.Header closeButton></Modal.Header>
+              <p className='check_icon'><BsCheckCircle></BsCheckCircle></p>
+              <h1 className='text-center'>
+                    Success!
+              </h1>
+              <p className='text-center text-muted'>
+                Course successfully added...!
+              </p>
+            </Modal.Body>
+          </Modal>
 
       </main>
     </>

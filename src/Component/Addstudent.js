@@ -224,7 +224,7 @@ function Addstudent() {
                                              </div>
                                         </div>
 
-                                        <button type="submit" className="btn btn-login mt-3 d-block mx-auto">Submit</button>
+                                        <button type="button" className="btn btn-login mt-3 d-block mx-auto">Submit</button>
                                    </div>
                               </div>
                         </div>

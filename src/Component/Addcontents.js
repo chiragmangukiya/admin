@@ -1,7 +1,51 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Addcontents() {
+
+  const token = localStorage.getItem('token');
+  const [allcourse,setallCourse]=useState([]);
+  const [course,setcourse]=useState('');
+  const [contents,setcontents]=useState('');
+  const [duration,setduration]=useState('');
+  const [fees,setfees]=useState('');
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/course/allcourse",{
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then((res)=>{
+      // console.log(res.data.data);
+      setallCourse(res.data.data);
+    })
+  },[])
+
+  const addContent = () => {
+    axios.post("http://localhost:5000/course/addcontent",
+    {
+      course_id: course,
+      content: contents,
+      duration: duration, 
+      total_fees: fees
+    },{
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then((res)=>{
+      console.log(res.data);
+      if(res.data.status === "Content Add Successfully"){
+        setcourse('')
+        setcontents('')
+        setduration('')
+        setfees('')
+      }
+    })
+  }
+
   return (
     <>
       <main>
@@ -18,23 +62,27 @@ function Addcontents() {
                     <div className="p-5">
                         <div className="frm_title fs-4 text-center mb-3 fw-bold">Add Course Contents</div>
                         <div className="input-group mb-3">
-                          <select class="form-select txt_box" aria-label="Default select example">
+                          <select class="form-select txt_box" aria-label="Default select example" value={course} onChange={(e)=>{setcourse(e.target.value)}}>
                             <option selected>Select Course</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            {
+                              allcourse.map((item,index)=>{
+                                return(
+                                  <option value={item._id}>{item.coursename}</option>
+                                )
+                              })
+                            }
                           </select>
                         </div>
                         <div className="input-group mb-3">
-                          <input type="text" className="form-control txt_box" placeholder="Contents"  />
+                          <input type="text" className="form-control txt_box" placeholder="Contents" value={contents} onChange={(e)=>{setcontents(e.target.value)}}  />
                         </div>
                         <div className="input-group mb-3">
-                          <input type="text" className="form-control txt_box" placeholder="Fees"  />
+                          <input type="text" className="form-control txt_box" placeholder="Fees" value={fees} onChange={(e)=>{setfees(e.target.value)}} />
                         </div>
                         <div className="input-group mb-3">
-                          <input type="text" className="form-control txt_box" placeholder="Durations"  />
+                          <input type="text" className="form-control txt_box" placeholder="Durations" onChange={(e)=>{setduration(e.target.value)}} value={duration} />
                         </div>
-                        <button type="submit" className="btn btn-login mt-3 d-block mx-auto">Add Contents</button>
+                        <button className="btn btn-login mt-3 d-block mx-auto" onClick={addContent}>Add Contents</button>
                     </div>
                </div>
           </div>

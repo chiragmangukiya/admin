@@ -16,7 +16,7 @@ function ViewCourse() {
         })
         .then((res)=>{
           console.log(res.data);
-          // setallCourse(res.data)
+          setallCourse(res.data.data1)
           setstatus(true)          
         })
     },[])
@@ -48,7 +48,7 @@ function ViewCourse() {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* {
+                              {
                                 allCourse.map((item,ind)=>{
                                   return(
                                     <tr key={ind}>
@@ -58,7 +58,7 @@ function ViewCourse() {
                                     </tr>
                                   )
                                 })
-                              } */}
+                              }
                             </tbody>
                           </table>
                         </div>

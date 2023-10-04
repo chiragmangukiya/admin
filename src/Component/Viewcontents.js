@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 function Viewcontents() {
+
+  const token = localStorage.getItem('token')
+  const [allContent,setallContent]=useState([]);
+  const [status,setstatus]=useState(false);
+
+    useEffect(()=>{
+        axios.get("http://localhost:5000/course/allcontent",{
+          headers: {
+            'Authorization': token
+          }
+        })
+        .then((res)=>{
+          console.log(res.data);
+          setallContent(res.data.data)
+          setstatus(true)          
+        })
+    },[])
+
+  if(status)
+  {
+
   return (
     
     <main>
@@ -24,18 +46,24 @@ function Viewcontents() {
                                 <th scope="col">#</th>
                                 <th scope="col">Course Name</th>
                                 <th scope="col">Contents</th>
-                                <th scope="col">Fees</th>
-                                <th scope="col">Duration</th>
+                                <th scope="col" className='text-center'>Fees</th>
+                                <th scope="col" className='text-center'>Duration</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Web Design</td>
-                                <td>HTML/HTML5, CSS/CSS3</td>
-                                <td>75000</td>
-                                <td>12</td>
-                              </tr>
+                              {
+                                allContent.map((item,index)=>{
+                                  return(
+                                    <tr>
+                                      <th scope="row">{index+1}</th>
+                                      <td>{item.coursename}</td>
+                                      <td>{item.content_id.content}</td>
+                                      <td align='center'>{item.content_id.total_fees}</td>
+                                      <td align='center'>{item.content_id.duration} <sub className='text-muted'>Months</sub></td>
+                                    </tr>
+                                  )
+                                })
+                              }
                             </tbody>
                           </table>
                         </div>
@@ -44,8 +72,13 @@ function Viewcontents() {
           </div>
 
     </main>
-
   )
+  }
+  else{
+    return( 
+      <h1>Data Load</h1>
+    )
+  }
 }
 
 export default Viewcontents
