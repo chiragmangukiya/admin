@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal';
+import { BsCheckCircle } from "react-icons/bs";
 
 function Addcontents() {
 
@@ -10,6 +12,8 @@ function Addcontents() {
   const [contents,setcontents]=useState('');
   const [duration,setduration]=useState('');
   const [fees,setfees]=useState('');
+  const [modalShow, setModalShow] = useState(false);
+
 
   useEffect(()=>{
     axios.get("http://localhost:5000/course/allcourse",{
@@ -19,7 +23,7 @@ function Addcontents() {
     })
     .then((res)=>{
       // console.log(res.data.data);
-      setallCourse(res.data.data);
+      setallCourse(res.data.data1);
     })
   },[])
 
@@ -36,8 +40,9 @@ function Addcontents() {
       }
     })
     .then((res)=>{
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data.status === "Content Add Successfully"){
+        setModalShow(true)
         setcourse('')
         setcontents('')
         setduration('')
@@ -86,6 +91,24 @@ function Addcontents() {
                     </div>
                </div>
           </div>
+          <Modal 
+            size="md"
+            centered
+            className='success_modal'
+            show={modalShow} 
+            onHide={() => setModalShow(false)}
+          >
+            <Modal.Body>
+              <Modal.Header closeButton></Modal.Header>
+              <p className='check_icon'><BsCheckCircle></BsCheckCircle></p>
+              <h1 className='text-center'>
+                    Success!
+              </h1>
+              <p className='text-center text-muted'>
+                Course Content successfully added...!
+              </p>
+            </Modal.Body>
+          </Modal>
 
       </main>
     </>

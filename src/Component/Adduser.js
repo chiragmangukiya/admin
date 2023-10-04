@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
+import { BsCheckCircle } from "react-icons/bs";
 
 function Adduser() {
 
      const [allUser,setallUser]=useState([]);
      const [email, setEmail] = useState('');
      const [pass, setPass] = useState('');
+     const [modalShow, setModalShow] = useState(false);
+
 
      const addUser = () => {
           axios.post("http://localhost:5000/register",{
@@ -16,6 +20,7 @@ function Adduser() {
           .then((res)=>{
                // console.log(res.data);
                setallUser((allUser)=>[res.data,...allUser])
+               setModalShow(true)
                setEmail('');
                setPass('');
           })
@@ -46,7 +51,24 @@ function Adduser() {
                     </div>
                </div>
           </div>
-
+          <Modal 
+            size="md"
+            centered
+            className='success_modal'
+            show={modalShow} 
+            onHide={() => setModalShow(false)}
+          >
+            <Modal.Body>
+              <Modal.Header closeButton></Modal.Header>
+              <p className='check_icon'><BsCheckCircle></BsCheckCircle></p>
+              <h1 className='text-center'>
+                    Success!
+              </h1>
+              <p className='text-center text-muted'>
+                User successfully added...!
+              </p>
+            </Modal.Body>
+          </Modal>
       </main>
     </>
   )

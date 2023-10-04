@@ -1,8 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Success from './Success';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheckCircle } from "react-icons/bs";
 
